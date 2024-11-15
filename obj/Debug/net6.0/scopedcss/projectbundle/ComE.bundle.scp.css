@@ -1,0 +1,79 @@
+/* _content/ComE/Pages/Shared/_Layout.cshtml.rz.scp.css */
+/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand[b-2um2s2ey98] {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+a[b-2um2s2ey98] {
+  color: #0077cc;
+}
+
+.btn-primary[b-2um2s2ey98] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active[b-2um2s2ey98], .nav-pills .show > .nav-link[b-2um2s2ey98] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.border-top[b-2um2s2ey98] {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom[b-2um2s2ey98] {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow[b-2um2s2ey98] {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy[b-2um2s2ey98] {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+.footer[b-2um2s2ey98] {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px;
+}
+
+/* เมนูฝั่งขวา (รวมทั้งปุ่ม login/logout และข้อความ Hello! [Username]) */
+.right-btn[b-2um2s2ey98] {
+    display: flex;
+    align-items: center;
+    margin-left: auto; /* เพิ่มเพื่อให้ขยับไปทางขวาสุด */
+}
+
+    .right-btn li.greeting[b-2um2s2ey98] {
+        margin-left: 15px; /* เพิ่มระยะห่างจากปุ่ม login/logout */
+        font-size: 16px;
+        color: #002649; /* สีที่ต้องการให้กับข้อความ */
+    }
+
+/* ปุ่ม Login / Log out */
+button.login[b-2um2s2ey98] {
+    border: none;
+    background-color: #f0f04c;
+    padding: 5px 15px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #002649;
+    margin-right: 15px;
+}
+
+    button.login:hover[b-2um2s2ey98] {
+        background-color: #e5e55b;
+        transform: scale(0.95);
+        transition: transform 0.3s ease;
+    }

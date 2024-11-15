@@ -1,0 +1,67 @@
+﻿@page
+@model ComE.Pages.InboxModel
+@{
+    ViewData["Title"] = "Inbox";
+    <link rel="stylesheet" href="css/site.css" asp-append-version="true" />
+}
+
+<div class="container">
+    <!--แถบเมนูทางด้านขวาที่เป็นรูปไอคอนจดหมายกับดินสอ-->
+    <div class="sidebar">
+        <a asp-area="" asp-page="/Inbox">
+            <button class="menu-item"><img src="img/mail.png" width="40"></button>
+        </a>
+        <a asp-area="" asp-page="/ComposeEmail">
+            <button class="menu-item"><img src="img/writemail.png" width="40"></button>
+        </a>
+    </div>
+
+    <div class="content">
+        <div class="inbox-list">
+            <!--ดึงค่าจากตาราง emails มาแสดง-->
+            @foreach (var email in Model.listEmails)
+            {
+                <div class="inbox-content">
+                    <a href="?subject=@Uri.EscapeDataString(email.subject)" class="message-link">
+                        <div class="message">
+                            <img src="img/profile.png" alt="User" class="avatar" />
+                            <div class="message-content">
+                                <h3><strong>@email.frommail</strong> <span>@email.date</span> <span>@(email.IsRead ? "Read" : "Unread")</span></h3>
+                                <p class="subject">@email.subject</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            }
+        </div>
+
+        <!--ดึงค่าจากตาราง emails มาแสดง-->
+        @if (Model.selectedEmail != null)
+        {
+            <div class="message-detail">
+                <h2>@Model.selectedEmail.subject</h2>
+                <div class="message-info">
+                    <img src="img/profile.png" class="avatar" />
+                    <h3><strong>@Model.selectedEmail.frommail</strong></h3>
+                    <p class="date">@Model.selectedEmail.date</p>
+                </div>
+                <p class="message">@Model.selectedEmail.message</p>
+                <br>
+                <div class="message-actions">
+                    <button class="backbtn"><a href="/Inbox" class="btn btn-secondary">Back</a></button>
+                    <button class="btn btn-danger" onclick="confirmDelete('@Model.selectedEmail.subject')">Delete</button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        function confirmDelete(subject) {
+            if (confirm("Are you sure you want to delete this email?")) {
+                window.location.href = "/Inbox?handler=Delete&subject=" + encodeURIComponent(subject);
+            }
+        }
+    </script>
+}
