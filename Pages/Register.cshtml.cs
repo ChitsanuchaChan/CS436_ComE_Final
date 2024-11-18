@@ -4,12 +4,12 @@ using System.Data.SqlClient;
 
 namespace ComE.Pages
 {
-
     public class RegisterModel : PageModel
     {
-
         public class UserData
         {
+            public string firstname { get; set; }
+            public string lastname { get; set; }
             public string role { get; set; }
             public string email { get; set; }
             public string username { get; set; }
@@ -27,16 +27,18 @@ namespace ComE.Pages
 
         public IActionResult OnPost()
         {
+            User.firstname = Request.Form["firstname"];
+            User.lastname = Request.Form["lastname"];
             User.role = Request.Form["role"];
             User.email = Request.Form["email"];
             User.username = Request.Form["username"];
             User.password = Request.Form["password"];
             User.cfpassword = Request.Form["cfpassword"];
 
-            //??????? password ?????? confrim password ????
+            // ตรวจสอบว่า Password ตรงกับ Confirm Password
             if (User.password != User.cfpassword)
             {
-                errorMessage = "Password don't match";
+                errorMessage = "Passwords do not match.";
                 return Page();
             }
 
@@ -47,12 +49,26 @@ namespace ComE.Pages
                 {
                     connection.Open();
 
-                    //??????? username ???????
-                    string checkUsernameSql = "SELECT COUNT(*) FROM Users WHERE username = @username";
-                    using (SqlCommand checkCommand = new SqlCommand(checkUsernameSql, connection))
+                    // ตรวจสอบว่า Email มีอยู่ในระบบหรือไม่
+                    string checkEmailSql = "SELECT COUNT(*) FROM Users WHERE email = @Email";
+                    using (SqlCommand emailCheckCommand = new SqlCommand(checkEmailSql, connection))
                     {
-                        checkCommand.Parameters.AddWithValue("@username", User.username);
-                        int userExists = (int)checkCommand.ExecuteScalar();
+                        emailCheckCommand.Parameters.AddWithValue("@Email", User.email);
+                        int emailExists = (int)emailCheckCommand.ExecuteScalar();
+
+                        if (emailExists > 0)
+                        {
+                            errorMessage = "Email already exists.";
+                            return Page();
+                        }
+                    }
+
+                    // ตรวจสอบว่า Username มีอยู่ในระบบหรือไม่
+                    string checkUsernameSql = "SELECT COUNT(*) FROM Users WHERE username = @Username";
+                    using (SqlCommand usernameCheckCommand = new SqlCommand(checkUsernameSql, connection))
+                    {
+                        usernameCheckCommand.Parameters.AddWithValue("@Username", User.username);
+                        int userExists = (int)usernameCheckCommand.ExecuteScalar();
 
                         if (userExists > 0)
                         {
@@ -61,15 +77,16 @@ namespace ComE.Pages
                         }
                     }
 
-                    //??????????????????? Users
-                    string sql = "INSERT INTO Users (role, email, username, password) VALUES (@role, @email, @username, @password);";
+                    // เพิ่มข้อมูลผู้ใช้ใหม่ลงในตาราง Users
+                    string sql = "INSERT INTO Users (firstname, lastname, role, email, username, password) VALUES (@Firstname, @Lastname, @Role, @Email, @Username, @Password)";
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
-                        command.Parameters.AddWithValue("@role", User.role);
-                        command.Parameters.AddWithValue("@email", User.email);
-                        command.Parameters.AddWithValue("@username", User.username);
-                        command.Parameters.AddWithValue("@password", User.password);
-
+                        command.Parameters.AddWithValue("@Firstname", User.firstname);
+                        command.Parameters.AddWithValue("@Lastname", User.lastname);
+                        command.Parameters.AddWithValue("@Role", User.role);
+                        command.Parameters.AddWithValue("@Email", User.email);
+                        command.Parameters.AddWithValue("@Username", User.username);
+                        command.Parameters.AddWithValue("@Password", User.password); // อย่าลืมเข้ารหัสรหัสผ่านก่อนบันทึกจริง
 
                         command.ExecuteNonQuery();
                     }
@@ -81,15 +98,17 @@ namespace ComE.Pages
                 return Page();
             }
 
+            // เคลียร์ข้อมูลหลังจากบันทึกสำเร็จ
+            User.firstname = "";
+            User.lastname = "";
             User.role = "";
             User.email = "";
             User.username = "";
             User.password = "";
             User.cfpassword = "";
-            successMessage = "Add user successfully";
+            successMessage = "User registered successfully!";
 
             return Page();
         }
     }
-
 }

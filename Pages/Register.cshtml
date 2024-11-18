@@ -40,33 +40,56 @@
                     </div>
                 }
 
-                <!--ฟอร์ม input ให้กรอก role / email / username / password / confirm password-->
                 <div class="modal-body">
+                    <!-- First Name -->
                     <div class="form-group">
-                        <label for="role">Role</label>
-                        <input type="text" id="role" name="role" class="form-control" value="@Model.User.role" required />
+                        <label for="firstname">First Name</label>
+                        <input type="text" id="firstname" name="firstname" class="form-control" value="@Model.User.firstname" required />
                     </div>
 
+                    <!-- Last Name -->
                     <div class="form-group">
-                        <label for="email">Email&nbsp;&nbsp;</label>
+                        <label for="lastname">Last Name</label>
+                        <input type="text" id="lastname" name="lastname" class="form-control" value="@Model.User.lastname" required />
+                    </div>
+
+                    <!-- Role -->
+                    <div class="form-group">
+                        <label for="role">Role</label>
+                        <select id="role" name="role" class="form-control" required>
+                            <option value="" disabled selected>-- Select Role --</option>
+                            <option value="SaleD1">Sale Department 1</option>
+                            <option value="SaleD2">Sale Department 2</option>
+                            <option value="SaleD3">Sale Department 3</option>
+                            <option value="Warehouse">Warehouse</option>
+                        </select>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="form-group">
+                        <label for="email">Email</label>
                         <input type="email" id="email" name="email" class="form-control" value="@Model.User.email" required />
                     </div>
 
+                    <!-- Username -->
                     <div class="form-group">
-                        <label for="username">Username&nbsp;&nbsp;</label>
+                        <label for="username">Username</label>
                         <input type="text" id="username" name="username" class="form-control" value="@Model.User.username" required />
                     </div>
 
+                    <!-- Password -->
                     <div class="form-group">
-                        <label for="password">Password&nbsp;&nbsp;</label>
+                        <label for="password">Password</label>
                         <input type="password" id="password" name="password" class="form-control" value="@Model.User.password" required />
                     </div>
 
+                    <!-- Confirm Password -->
                     <div class="form-group">
-                        <label for="cfpassword">ConfirmPassword&nbsp;</label>
+                        <label for="cfpassword">Confirm Password</label>
                         <input type="password" id="cfpassword" name="cfpassword" class="form-control" value="@Model.User.cfpassword" required />
                     </div>
                 </div>
+
 
                 <!--ปุ่ม Add user-->
                 <div class="modal-footer">

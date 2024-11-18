@@ -13,7 +13,7 @@
 
             <form method="post">
 
-                <!--แสดง errorMessage-->
+                <!-- errorMessage -->
                 @if (Model.errorMessage.Length > 0)
                 {
                     <div class="row d-flex justify-content-center mt-3 mb-0 mx-3">
@@ -25,7 +25,7 @@
                         </div>
                     </div>
                 }
-                <!--ฟอร์ม input ให้กรอก username / password-->
+                <!--ฟอร์ม input ให้กรอก username password-->
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="username">Username&nbsp;</label>
@@ -38,9 +38,9 @@
                     </div>
                 </div>
 
-                <!--ปุ่ม Sign in-->
+                <!--ปุ่ม Log in-->
                 <div class="modal-footer">
-                    <button type="submit" class="loginbtn">Sign in</button>
+                    <button type="submit" class="loginbtn">Log in</button>
                 </div>
                 <p class="register">Don't have any acoount? <a asp-area="" asp-page="/Register">Add user</a></p>
             </form>
