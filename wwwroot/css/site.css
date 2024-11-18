@@ -221,40 +221,113 @@ textarea {
     }
 
 /* Login & Register Modals */
-.login-modal, .register-modal {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    margin-top: 100px;
-    margin-bottom: 100px;
-}
-
+/* General modal styling */
 .modal-dialog {
-    width: 400px;
-    max-width: 90%;
+    width: 450px;
+    max-width: 95%;
     background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    overflow: hidden; /* Ensure no content spills out */
+    padding: 20px;
 }
 
+/* Header styling */
 .modal-header {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     background-color: #e9e94c;
     color: #002649;
-    padding: 10px 20px;
-    font-family: 'Prompt';
-    border-radius: 4px;
+    padding: 15px 20px;
+    font-family: 'Prompt', sans-serif;
+    font-size: 20px;
+    font-weight: bold;
 }
 
-.modal-footer {
-    display: flex;
-    justify-content: center;
+/* Input fields */
+input[type="text"], input[type="email"], input[type="password"] {
+    font-size: 16px;
+    padding: 12px; /* เพิ่ม padding ให้สวยงาม */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 15px; /* เพิ่มช่องว่างระหว่าง input */
+    transition: all 0.3s ease;
 }
 
+    input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus {
+        border-color: #e9e94c;
+        box-shadow: 0 0 5px rgba(233, 233, 76, 0.4);
+        outline: none;
+    }
+
+
+/* Dropdown styles */
+select.form-control {
+    font-size: 16px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    width: calc(100% - 140px); /* ความกว้างของ dropdown */
+    box-sizing: border-box;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+    appearance: none; /* ซ่อนไอคอนลูกศรของ dropdown เริ่มต้น */
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns%3D%22http%3A//www.w3.org/2000/svg%22 width%3D%2224%22 height%3D%2224%22 viewBox%3D%220 0 24 24%22 fill%3D%22%23002649%22%3E%3Cpath d%3D%22M7 10l5 5 5-5z%22/%3E%3C/svg%3E');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 16px 16px;
+}
+
+    select.form-control:focus {
+        border-color: #e9e94c;
+        box-shadow: 0 0 5px rgba(233, 233, 76, 0.4);
+        outline: none;
+    }
+
+/* Labels */
+.form-group label {
+    display: inline-block; /* ช่วยจัดตำแหน่งให้ตรงกับ input */
+    font-weight: bold;
+    margin-bottom: 5px;
+    width: 120px; /* กำหนดความกว้างของ label ให้เท่ากันทุกบรรทัด */
+    text-align: right; /* จัดข้อความ label ให้ชิดขวา */
+    padding-right: 10px; /* เพิ่มระยะห่างระหว่าง label และ input */
+}
+/* Input fields */
+
+.form-group input {
+    font-size: 16px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    width: calc(100% - 140px); /* คำนวณให้ input ช่องซ้ายและขวาตรงกัน */
+    box-sizing: border-box; /* ช่วยให้ width ทำงานถูกต้อง */
+    margin-bottom: 15px; /* เพิ่มระยะห่างระหว่าง input */
+    transition: all 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+    border-color: #e9e94c;
+    box-shadow: 0 0 5px rgba(233, 233, 76, 0.4);
+    outline: none;
+}
+
+/* Form Group Alignment */
+.form-group {
+    display: flex; /* ใช้ flexbox เพื่อให้ label และ input ตรงกัน */
+    align-items: center; /* จัดตำแหน่ง label และ input ให้อยู่ตรงกลางแนวตั้ง */
+    margin-bottom: 20px; /* เพิ่มระยะห่างระหว่างฟิลด์ */
+}
+
+/* Submit buttons */
 .loginbtn, .addbtn {
     width: 100%;
     padding: 15px;
@@ -262,40 +335,61 @@ textarea {
     color: #002649;
     font-weight: bold;
     border: none;
-    border-radius: 4px;
+    border-radius: 8px;
     cursor: pointer;
+    transition: all 0.3s ease;
 }
 
     .loginbtn:hover, .addbtn:hover {
         background-color: #d6d354;
-        transform: scale(0.98);
-        transition: transform 0.3s ease;
+        transform: translateY(-3px);
     }
 
-.error {
-    background-color: rgb(252, 174, 174, 0.20);
-    border: solid 1px #a50000;
-    border-radius: 4px;
-    margin-top: 13px;
-}
-
-div p.alert {
-    color: #a50000;
+/* Links for register/login */
+p.register a, p.login a {
     font-weight: bold;
-    padding-left: 25px;
+    color: #002649;
+    text-decoration: none;
+    transition: color 0.2s ease-in;
 }
 
-p.register, p.login {
-    font-size: 15px;
-    text-align: center;
-}
-
-    p.register a, p.login a {
-        font-weight: bold;
-        text-decoration: none;
+    p.register a:hover, p.login a:hover {
+        text-decoration: underline;
+        color: #005680;
     }
 
-/* Miscellaneous */
+/* Form container alignment */
+.login-modal, .register-modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 80px;
+    margin-bottom: 80px;
+}
+
+/* เพิ่มระยะห่างสำหรับข้อความ Register/Login */
+p.register, p.login {
+    font-size: 16px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Success and error messages */
+.alert {
+    margin-top: 10px;
+}
+
+.error, .alert {
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 5px;
+}
+
+
+
+
 #cfpassword {
     margin-top: 15px;
 }
