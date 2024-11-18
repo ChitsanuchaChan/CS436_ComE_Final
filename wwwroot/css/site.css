@@ -97,15 +97,21 @@ button.login {
 
 .menu-item {
     margin-top: 10px;
-    background-color: #e9e94c;
+    background-color: #f7e65d; /* สีเหลืองที่ดูสดใสขึ้น */
     border: none;
     cursor: pointer;
+    border-radius: 8px; /* มุมมน */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* เพิ่มเงา */
+    padding: 10px;
+    transition: all 0.3s ease; /* ให้การเปลี่ยนแปลงลื่นไหล */
 }
 
     .menu-item:hover {
-        transform: scale(1.02);
-        transition: transform 0.3s ease;
+        background-color: #ffd700; /* เปลี่ยนเป็นสีเหลืองทองเมื่อชี้เมาส์ */
+        transform: scale(1.1); /* ขยายเล็กน้อย */
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* เงาชัดเจนขึ้น */
     }
+
 
 .content {
     display: flex;
