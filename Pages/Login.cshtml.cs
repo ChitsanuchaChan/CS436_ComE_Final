@@ -44,10 +44,11 @@ namespace ComE.Pages
 
                     string sql = "SELECT email FROM Users WHERE username = @username AND password = @password";
                     using (SqlCommand command = new SqlCommand(sql, connection))
-                    {
+                    { 
+                        // เพิ่มพารามิเตอร์เพื่อป้องกัน SQL Injection โดยการแทนค่าข้อมูลของผู้ใช้อย่างปลอดภัย
                         command.Parameters.AddWithValue("@username", User.username);
                         command.Parameters.AddWithValue("@password", User.password);
-
+                        //ดึงค่าของอีเมลออกมาเป็นค่าผลลัพธ์แบบสเกลาร์
                         var email = command.ExecuteScalar()?.ToString();
 
                         if (email != null)
@@ -57,9 +58,10 @@ namespace ComE.Pages
                                 new Claim(ClaimTypes.Name, User.username),
                                 new Claim(ClaimTypes.Email, email)
                             };
-
-                            var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                            // สร้าง Identity โดยใช้ Claims และกำหนด Authentication Scheme
+                            var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);                          
                             var principal = new ClaimsPrincipal(identity);
+                            // ลงชื่อเข้าใช้ผู้ใช้ด้วย Authentication Scheme และ Principal แบบ asyn
 
                             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
 

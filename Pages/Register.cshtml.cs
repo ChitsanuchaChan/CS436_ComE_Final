@@ -38,7 +38,7 @@ namespace ComE.Pages
             // ตรวจสอบว่า Password ตรงกับ Confirm Password
             if (User.password != User.cfpassword)
             {
-                errorMessage = "Passwords do not match.";
+                errorMessage = "Please check Passwords and Confirm Password.";
                 return Page();
             }
 
